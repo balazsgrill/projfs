@@ -159,10 +159,10 @@ type PRJ_EXTENDED_INFO struct {
 type PRJ_FILE_BASIC_INFO struct {
 	IsDirectory    bool
 	FileSize       int64
-	CreationTime   int64
-	LastAccessTime int64
-	LastWriteTime  int64
-	ChangeTime     int64
+	CreationTime   syscall.Filetime
+	LastAccessTime syscall.Filetime
+	LastWriteTime  syscall.Filetime
+	ChangeTime     syscall.Filetime
 	FileAttributes uint32
 }
 
@@ -194,12 +194,12 @@ type PRJ_PLACEHOLDER_INFO struct {
 		OffsetToFirstStreamInfo uint32
 	}
 	VersionInfo  PRJ_PLACEHOLDER_VERSION_INFO
-	VariableData [1]uint8
+	VariableData *uint8
 }
 
 type PRJ_PLACEHOLDER_VERSION_INFO struct {
-	ProviderID [PRJ_PLACEHOLDER_ID_LENGTH]uint8
-	ContentID  [PRJ_PLACEHOLDER_ID_LENGTH]uint8
+	ProviderID [PRJ_PLACEHOLDER_ID_LENGTH]byte
+	ContentID  [PRJ_PLACEHOLDER_ID_LENGTH]byte
 }
 
 type PRJ_STARTVIRTUALIZING_OPTIONS struct {
